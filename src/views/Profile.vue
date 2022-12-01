@@ -187,6 +187,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 import { mapMutations, mapActions, mapState } from "vuex";
 import Aside from '../components/Aside.vue';
 import Right from '../components/Right.vue';
@@ -323,15 +324,7 @@ export default {
         async fileUpload(file){
             if(!file) return;
             let form = new FormData();
-            form.append('name', this.user.name);
-            form.append('last_name', this.user.last_name);
-            form.append('id_card', this.user.id_card);
-            form.append('phone', this.user.phone);
-            form.append('city_id', this.user.city_id);
-            form.append('login', this.user.login);
-            form.append('consignment', file);
-            form.append('count_number', this.user.count_number);
-            form.append('sponsor_user', this.user.sponsor_user);
+            form.append('image', file);
             await this.loadFiles({id: this.user.id, form}).then(res=>{
                 if(res.status === 201) {
                     this.loadSessionUser({reload: true});
@@ -357,10 +350,17 @@ export default {
                 console.log(e)
             }
         },
+
+        async loadFiles({commit}, data){
+            let url = store.state.api_url + `/api/users/update/${data.id}`;
+            return await axios.post(url, data.form,
+            { headers: { "Authorization": "Bearer " + store.state.token}})
+        },
+
+
         modalPassword(){$('#modal-password').modal('show');},
         ...mapActions("user", ["loadFiles"]),
         ...mapActions("user", ["showFile"]),
-        ...mapActions("user", ["updateUser"]),
         ...mapActions("user", ["changePassword"]),
         ...mapActions("user", ["getUsersLine"]),
         ...mapActions("country", ["getCity"]),

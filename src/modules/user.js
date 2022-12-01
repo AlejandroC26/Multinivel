@@ -171,11 +171,6 @@ export default {
             return await axios.post(url, data,
             { headers: { "Authorization": "Bearer " + store.state.token}})
         },
-        async loadFiles({commit}, data){
-            let url = store.state.api_url + `/api/users/update/${data.id}`;
-            return await axios.post(url, data.form,
-            { headers: { "Authorization": "Bearer " + store.state.token}})
-        },
         async showFile({commit}, data){
             let url = store.state.api_url + `/api/users/${data.id}/file/consignment`;
             return axios.get(url,
