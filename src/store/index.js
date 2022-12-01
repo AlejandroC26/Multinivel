@@ -118,7 +118,7 @@ export default new Vuex.Store({
                     })
                     state.loaded_user = 0;
                 }).catch(err=>{
-                    console.log(err)
+                    console.log(err.response)
                     if(err.response.status == 401) {
                         let url = state.api_url+'/api/auth/logout';
                         axios.post(url, '',
