@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\UserConsignment;
 use App\Models\ViewUserData;
 use App\Models\ViewUserSponsors;
 use App\Models\ViewSearchUser;
@@ -140,7 +141,6 @@ class UserController extends Controller
             'count_type'=> Rule::in(['Nequi', 'Bancolombia - Ahorros', 'Bancolombia - Corriente']),
             'count_number' => 'required|string:min:5',
             'sponsor_user' => 'integer|required',
-            'consignment' => 'mimes:png,jpg,jpeg|max:10240',
         ]);
 
         if($validator->fails()) return response()->json(['message' => 'Field validation failed: '.$validator->errors()->toJson()],400);
@@ -179,12 +179,6 @@ class UserController extends Controller
         if(!$request->state) $user->state;
         else $user->state = $request->state;
 
-        if($request->hasFile("consignment")){
-            $consignment_file_name = 'consignment_'.$user->id.'.jpeg';
-            $request->file('consignment')->storeAs('public/user-consignment', $consignment_file_name);
-            $user->consignment = $consignment_file_name;
-            $user->state = 'Revisión';
-        }
         if($request->state === 'Activo') 
             $user->activation_date = now();
         
@@ -194,6 +188,31 @@ class UserController extends Controller
             'message' => '¡Usuario actualizado exitosamente!',
             'data' => $user,
         ], 201);
+    }
+
+    /* ==========LOAD CONSGIMENT FILE */
+    public function loadConsignmentFile (Request $request, $id){
+        $user = User::find($id);
+        if(!$user) return response()->json(['status'=> 'error', 'message'=> 'User not found']);
+
+        $validator = Validator::make($request->all(), [
+            'type' => Rule::in(['Activación', 'Deposito 1', 'Deposito 2', 'Deposito 3']),
+            'image' => 'required|mimes:png,jpg,jpeg|max:10240',
+        ]);
+
+        $consignment_file_name = 'consignment_'.$user->id.'.jpeg';
+        $request->file('image')->storeAs('public/user-consignment', $consignment_file_name);
+
+        $consignment = UserConsignment::create(array_merge(
+            $validator->validate(),[
+                'user_id ' => $id,
+                'image' => $consignment_file_name
+            ]
+        ));
+        return response()->json([
+            'message' => '¡Archivo cargado exitosamente!',
+            'data' => $consignment
+        ], 201);        
     }
 
     public function showFile(Request $request, $id, $file) {
@@ -214,8 +233,8 @@ class UserController extends Controller
         $path = storage_path('app/public/'.$url);
         $base64 = base64_encode(file_get_contents($path));
         return response()->json(["data"=>$base64]);
-    }   
- 
+    }  
+
     /* ===========SECONDARY_DATA=============== */
     public function lines(Request $request, $id){
         $line_1 = ViewUserData::select(DB::raw('COUNT(*) AS total'))

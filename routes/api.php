@@ -28,6 +28,7 @@ Route::group([
 Route::group([
     'prefix' => 'users'
 ], function ($router) {
+    Route::post('/{id}/loadConsignmentFile', 'App\Http\Controllers\UserController@loadConsignmentFile');
     Route::post('/register', 'App\Http\Controllers\UserController@register');
     Route::post('/update/{id}', 'App\Http\Controllers\UserController@update');
     /* =======SECONDARY============== */
@@ -41,47 +42,6 @@ Route::group([
     Route::get('/list', 'App\Http\Controllers\UserController@list');
     Route::post('/change_password/{id}', 'App\Http\Controllers\UserController@change_password');
     Route::post('/reset_password/{id}', 'App\Http\Controllers\UserController@reset_password');
-});
-
-/* ====SALE POINT======= */
-Route::group([
-    'prefix' => 'salepoints'
-], function ($router) {
-    Route::post('/list/{id}', 'App\Http\Controllers\SalePointController@show');
-    Route::post('/list', 'App\Http\Controllers\SalePointController@list');
-    Route::post('/create', 'App\Http\Controllers\SalePointController@register');
-    Route::post('/update/{id}', 'App\Http\Controllers\SalePointController@update');
-    Route::get('/{id}/commissions', 'App\Http\Controllers\SalePointController@commission');
-    // Sale point
-    Route::post('/{id}/payment', 'App\Http\Controllers\SalePointController@payment');
-    Route::post('/{id}/payments/list', 'App\Http\Controllers\SalePointController@paymentList');
-    Route::post('/{id}/asigned', 'App\Http\Controllers\SalePointController@showAsigned');
-    Route::post('/asign_user', 'App\Http\Controllers\SalePointController@asignUser');
-    Route::post('/remove_user/{id}', 'App\Http\Controllers\SalePointController@removeUser');
-    // Route::post('/delete/{id}', 'App\Http\Controllers\SalePointController@delete'); */    
-    Route::post('/percent/{id}', 'App\Http\Controllers\SalePercentOptionController@create');
-    Route::post('/percent/delete/{id}', 'App\Http\Controllers\SalePercentOptionController@delete');
-
-    Route::post('/option/{id}', 'App\Http\Controllers\SaleMoneyOptionController@create');
-    Route::post('/option/delete/{id}', 'App\Http\Controllers\SaleMoneyOptionController@delete');
-});
-/* ====SALE======= */
-Route::group([
-    'prefix' => 'sale'
-], function ($router) {
-    Route::post('/list/{id}', 'App\Http\Controllers\SaleController@show');
-    Route::post('/list', 'App\Http\Controllers\SaleController@list');
-    Route::post('/create', 'App\Http\Controllers\SaleController@create');
-    //Route::post('/import', 'App\Http\Controllers\SaleController@import');
-    Route::delete('/delete/{id}', 'App\Http\Controllers\SaleController@delete');
-});
-/* ====COMMISSION======= */
-Route::group([
-    'prefix' => 'commission'
-], function ($router) {
-    Route::get('/general', 'App\Http\Controllers\CommissionController@general');
-    Route::post('/create', 'App\Http\Controllers\CommissionController@create');
-    Route::post('/payment', 'App\Http\Controllers\CommissionController@payment');
 });
 
 Route::group([

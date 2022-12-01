@@ -35,7 +35,6 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'count_type',
         'state',
-        'consignment',
         'count_number',
         'sponsor_user',
         'activation_date'

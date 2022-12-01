@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'id_card' => '123',
             'phone' => '313',
             'city_id' => null,
-            'login' => 'usuario1',
+            'login' => 'usuario2',
             'sponsor_user' => 2,
             'state'=>'Activo',
             'activation_date'=>now(),

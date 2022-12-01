@@ -31,7 +31,6 @@ class CreateUsersTable extends Migration
             $table->string('count_number');
             $table->integer('sponsor_user')->nullable();
             $table->enum('state', ['Activo', 'Revisión', 'Inactivo', 'Finalizado'])->default('Inactivo');
-            $table->string('consignment')->nullable();
             $table->datetime('activation_date')->nullable();
             $table->timestamps();
         });
