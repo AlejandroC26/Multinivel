@@ -121,8 +121,8 @@
                         <span v-if="(formatDate(sumarDias(session_user.created_at, 23)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 2</span>
                         <span v-if="(formatDate(sumarDias(session_user.created_at, 34)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 3</span>
                         <br>
-                        <span style="font-size: 1.3rem">Paga al usuario: {{session_user.sp_user_name}}</span> <br>
-                        <span style="font-size: 1.3rem">{{session_user.sp_user_count_type}} - {{session_user.sp_user_count_number}}</span> 
+                        <span style="font-size: 1.3rem">Paga al usuario: {{session_user.consign_user_name}}</span> <br>
+                        <span style="font-size: 1.3rem">{{session_user.consign_user_count_type}} - {{session_user.consign_user_count_number}}</span> 
                     </div>
                 </div>
             </div>

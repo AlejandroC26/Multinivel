@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\ViewUserData;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -26,10 +26,20 @@ class AuthController extends Controller
     }
     public function me(Request $request){
         $user = JWTAuth::user();
-        $user_data = User::select('u.name','u.last_name','c.id', 'c.department', 'c.country_code', 'u.count_type', 'u.count_number')
-            ->leftJoin('cities as c','c.id','=','users.city_id')
-            ->leftJoin('users as u','u.id','=','users.sponsor_user')
-            ->where('users.id', '=', $user->id)
+        $user_data = ViewUserData::select(
+                'u.name',
+                'u.last_name',
+                'c.id', 
+                'c.department', 
+                'c.country_code', 
+                DB::RAW("CONCAT(u2.name, ' ', u2.last_name) as consign_user_name"),
+                'u2.count_type as consign_user_count_type',
+                'u2.count_number as consign_user_count_number'
+            )
+            ->leftJoin('cities as c','c.id','=','list_users_view.city_id')
+            ->leftJoin('users as u','u.id','=','sp_user_1')
+            ->leftJoin('users as u2','u2.id','=','sp_user_3')
+            ->where('list_users_view.id', '=', $user->id)
             ->get();
         $permissions = $user->getAllPermissions();
         $permissions_array = array();
@@ -50,10 +60,10 @@ class AuthController extends Controller
             "count_number"=> $user->count_number,
             "sp_user_code"=> $user->sponsor_user,
             "sp_user_name"=> trim($user_data[0]->name).' '.$user_data[0]->last_name,
-            "sp_user_count_type"=> $user_data[0]->count_type,
-            "sp_user_count_number"=> $user_data[0]->count_number,
+            "consign_user_name"=> $user_data[0]->consign_user_name,
+            "consign_user_count_type"=> $user_data[0]->consign_user_count_type,
+            "consign_user_count_number"=> $user_data[0]->consign_user_count_number,
             "state"=>$user->state,
-            "consignment" => $user->consignment,
             "permissions" => $permissions_array,
             "created_at"=> $user->created_at,
             "updated_at"=> $user->updated_at

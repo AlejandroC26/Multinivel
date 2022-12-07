@@ -21,7 +21,7 @@ class CreateUserView extends Migration
     {
         return <<<SQL
             CREATE VIEW list_users_view AS
-                select u.id, CONCAT(u.name, ' ', u.last_name) as name, u.id_card,
+                select u.id, CONCAT(u.name, ' ', u.last_name) as name, u.id_card, u.count_type, u.count_number, u.city_id,
                     u.sponsor_user as sp_user_1,
                     (SELECT sponsor_user from users where id = sp_user_1) as sp_user_2,
                     (SELECT sponsor_user from users where id = sp_user_2) as sp_user_3,
