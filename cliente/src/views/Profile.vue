@@ -51,6 +51,7 @@
                                 <p>Tipo de Cuenta</p>
                                 <select class="form-control" v-model="user.count_type">
                                     <option value="Nequi">Nequi</option>
+                                    <option value="Daviplata">Nequi</option>
                                     <option value="Bancolombia - Ahorros">Bancolombia - Ahorros</option>
                                     <option value="Bancolombia - Corriente">Bancolombia - Corriente</option>
                                 </select>

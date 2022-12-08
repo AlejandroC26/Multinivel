@@ -65,6 +65,7 @@
                     <p>Tipo de Cuenta</p>
                     <select class="form-control" v-model="user.count_type">
                         <option value="Nequi">Nequi</option>
+                        <option value="Daviplata">Daviplata</option>
                         <option value="Bancolombia - Ahorros">Bancolombia - Ahorros</option>
                         <option value="Bancolombia - Corriente">Bancolombia - Corriente</option>
                     </select>
@@ -195,6 +196,10 @@ export default {
             }).catch(err => {
                 if(err.response.data.case == "max_sp")
                     return this.launchAlert({type: 'error', title: `¡El usuario con código ${this.user.sponsor_user} ya tiene dos usuarios afiliados!`})
+                
+                if(err.response.data.status === 'error')
+                    return this.launchAlert({type: 'error', title: err.response.data.message});
+
                 console.log(err)
                 console.log(err.response)
             })
@@ -231,7 +236,7 @@ export default {
     },
     mounted: function(){
         this.loadSessionUser();
-        setTimeout(() => {this.searchUser({search: this.session_user.id, order: 'ASC', limit: 20})}, 100);
+        //setTimeout(() => {this.searchUser({search: this.session_user.id, order: 'ASC', limit: 20})}, 100);
         this.getAllCountries();
         this.getCountryCities('COL');
     },
@@ -244,7 +249,8 @@ export default {
     },
     watch: {
         search_code: function (){
-            this.searchUser({search : this.search_code, order: 'ASC', limit: 20});
+            if(!this.search_code) this.search_code = 'NADA';
+            this.searchUser({search : this.search_code, order: 'ASC', limit: 1});
         },
     }
     

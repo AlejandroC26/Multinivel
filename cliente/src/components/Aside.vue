@@ -50,11 +50,11 @@
                 <span class="material-icons-sharp">&#xef6e;</span>
                 <h3>Devoluciones</h3>
             </router-link>
-            <router-link to="/seguimiento" v-bind:class="{'active': routeActive('seguimiento')}"
+            <!-- <router-link to="/seguimiento" v-bind:class="{'active': routeActive('seguimiento')}"
              v-if="session_user.pages.user_list">
                 <span class="material-icons-sharp">&#xebcc;</span>
                 <h3>Seguimiento</h3>
-            </router-link>
+            </router-link> -->
             <!----------------------------------->
             <hr style="color: var(--color-dark)" >
             <!----------------------------------->

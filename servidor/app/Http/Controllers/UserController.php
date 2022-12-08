@@ -90,7 +90,7 @@ class UserController extends Controller
             'login' => 'required|string|max:100|unique:users',
             'password' => 'required|string|min:3|confirmed',
             'password_confirmation' => 'required|string|min:3',
-            'count_type'=> Rule::in(['Nequi', 'Bancolombia - Ahorros', 'Bancolombia - Corriente']),
+            'count_type'=> Rule::in(['Nequi','Daviplata', 'Bancolombia - Ahorros', 'Bancolombia - Corriente']),
             'count_number' => 'required|string:min:5',
             'sponsor_user' => 'integer|required',
         ]);
@@ -150,7 +150,7 @@ class UserController extends Controller
             'phone' => 'required|string',
             'city_id' => 'required|integer',
             'login' => 'required|string|max:100',
-            'count_type'=> Rule::in(['Nequi', 'Bancolombia - Ahorros', 'Bancolombia - Corriente']),
+            'count_type'=> Rule::in(['Nequi','Daviplata', 'Bancolombia - Ahorros', 'Bancolombia - Corriente']),
             'count_number' => 'required|string:min:5',
             'sponsor_user' => 'integer|required',
         ]);

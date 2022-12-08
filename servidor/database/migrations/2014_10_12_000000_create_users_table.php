@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('login');
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('count_type', ['Nequi','Bancolombia - Ahorros', 'Bancolombia - Corriente'])->default('Nequi');
+            $table->enum('count_type', ['Nequi','Daviplata','Bancolombia - Ahorros', 'Bancolombia - Corriente'])->default('Nequi');
             $table->string('count_number');
             $table->integer('sponsor_user')->nullable();
             $table->enum('state', ['Activo', 'Revisión', 'Inactivo', 'Finalizado'])->default('Inactivo');

@@ -26,7 +26,7 @@ class AuthController extends Controller
     }
     public function me(Request $request){
         $user = JWTAuth::user();
-        $user_data = User::select('u.name','u.last_name','c.id', 'c.department', 'c.country_code')
+        $user_data = User::select('u.name','u.last_name','c.id', 'c.department', 'c.country_code', 'u.count_type', 'u.count_number')
             ->leftJoin('cities as c','c.id','=','users.city_id')
             ->leftJoin('users as u','u.id','=','users.sponsor_user')
             ->where('users.id', '=', $user->id)
@@ -49,7 +49,9 @@ class AuthController extends Controller
             "count_type"=> $user->count_type,
             "count_number"=> $user->count_number,
             "sp_user_code"=> $user->sponsor_user,
-            "sp_user_name"=> trim($user_data[0]->name).$user_data[0]->last_name,
+            "sp_user_name"=> trim($user_data[0]->name).' '.$user_data[0]->last_name,
+            "sp_user_count_type"=> $user_data[0]->count_type,
+            "sp_user_count_number"=> $user_data[0]->count_number,
             "state"=>$user->state,
             "consignment" => $user->consignment,
             "permissions" => $permissions_array,

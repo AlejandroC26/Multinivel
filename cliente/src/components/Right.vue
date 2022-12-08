@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="sales-analytics mt-3" v-if="session_lines.loaded">
-            <h2>Líneas activas </h2>
+            <h2>Niveles </h2>
             <div class="item" v-for="i in 9" :key="i" @click="showLine(i)">
                 <div class="icon">
                     <span class="material-icons-sharp active">&#xe7fd;</span>
@@ -116,15 +116,15 @@ export default {
         },
         renderNumLinea(num){
             switch (num) {
-                case 1:return 'Primera Línea'
-                case 2:return 'Segunda Línea'
-                case 3:return 'Tercera Línea'
-                case 4:return 'Cuarta Línea'
-                case 5:return 'Quinta Línea' 
-                case 6:return 'Sexta Línea' 
-                case 7:return 'Séptima Línea' 
-                case 8:return 'Octava Línea' 
-                case 9:return 'Novena Línea' 
+                case 1:return 'Nivel 1'
+                case 2:return 'Nivel 2'
+                case 3:return 'Nivel 3'
+                case 5:return 'Nivel 4' 
+                case 4:return 'Nivel 5'
+                case 6:return 'Nivel 6' 
+                case 7:return 'Nivel 7' 
+                case 8:return 'Nivel 8' 
+                case 9:return 'Nivel 9' 
                 default:return ''
             }
         },
