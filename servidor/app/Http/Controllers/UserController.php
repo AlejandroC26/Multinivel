@@ -46,7 +46,6 @@ class UserController extends Controller
             "consignment"=> $user->consignment,
             "count_type"=>$user->count_type,
             "count_number"=>$user->count_number,
-            "activation_date"=>$user->activation_date,
             "created_at"=> $user->created_at,
             "updated_at"=> $user->updated_at
         ];
@@ -65,7 +64,7 @@ class UserController extends Controller
         $users = User::select([
             'id', 'name', 'last_name', 
             'id_card', 'phone', 
-            'phone', 'sponsor_user','state', 'activation_date', 'created_at'])
+            'phone', 'sponsor_user','state', 'created_at'])
         ->where('state', '=', $state)
         ->get();
         return response()->json($users);
@@ -188,12 +187,19 @@ class UserController extends Controller
         $user->login = $request->login;
         $user->sponsor_user = $sponsor_user;
 
-        if(!$request->state) $user->state;
-        else $user->state = $request->state;
+        if($request->state) $user->state = $request->state;
+        if($request->state === 'Activo') {
+            $user_consignments = UserConsignment::where('user_id', $user->id)->get();
+            if(count($user_consignments) === 0) {
+                $consignment = UserConsignment::create([
+                    'user_id'=>$user->id,
+                    'type'=>'Activación',
+                    'state'=>'Aceptado'
+                ]);
+            }
+        }
+        if($request->created_at) $user->created_at = $request->created_at;
 
-        if($request->state === 'Activo') 
-            $user->activation_date = now();
-        
         $user->save();
 
         return response()->json([

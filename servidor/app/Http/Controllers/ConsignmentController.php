@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Validator;
 class ConsignmentController extends Controller
 {
     public function countWaitingUsers(Request $request) {
-        $user_waiting = User::select(DB::raw('COUNT(*) AS count'))->where('state', '=', 'Revisión')->get();
+        $user_waiting = User::select(DB::raw('COUNT(*) AS count'))
+            ->where('state', '=', 'Revisión')
+            ->get();
         return response()->json($user_waiting);
     }
 
@@ -48,7 +50,6 @@ class ConsignmentController extends Controller
                 if($user_consignment->type === 'Activación') {
                     $user = User::find($user_consignment->user_id);
                     $user->state = 'Activo';
-                    if(!$user->activation_date) $user->activation_date = now();
                     $user->save();
                 }
                 break;

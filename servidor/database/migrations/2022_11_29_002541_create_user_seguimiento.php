@@ -16,23 +16,10 @@ class CreateUserSeguimiento extends Migration
     {
         return <<<SQL
             CREATE VIEW `user_seguimiento` AS 
-                SELECT COUNT(*) as total, 
-                    DATE_FORMAT(activation_date, "%Y-%m-%d") as activacion, 
-                    DATE_ADD(DATE_FORMAT(activation_date, "%Y-%m-%d"), INTERVAL 11 DAY) pago1, 
-                    DATE_ADD(DATE_FORMAT(activation_date, "%Y-%m-%d"), INTERVAL 22 DAY) pago2, 
-                    DATE_ADD(DATE_FORMAT(activation_date, "%Y-%m-%d"), INTERVAL 33 DAY) pago3 
-                FROM users 
-                WHERE state = 'Activo' 
-                and activation_date 
-                GROUP BY DATE_FORMAT(activation_date, "%Y-%m-%d")
+                SELECT * from users
             SQL;
     }
-    
-    /**
-        * Reverse the migrations.
-        *
-        * @return void
-        */
+
     private function dropView(): string
     {
         return <<<SQL

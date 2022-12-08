@@ -142,6 +142,23 @@
                                 <button class="mt-4 btn btn-secondary" style="width: 100%;" @click="modalPassword()">Restablecer</button>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <p>Fecha de Registro</p>
+                                <input v-model="user.created_at" class="form-control" type="datetime-local">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <p>Estado</p>
+                                <select v-model="user.state" class="form-control">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-3">

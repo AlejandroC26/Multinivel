@@ -75,10 +75,10 @@ export default {
                 state.user.login = res.data.login;
                 state.user.sponsor_user = res.data.sponsor_user;
                 state.user.num_paid = res.data.num_paid;
-                state.user.consignment = res.data.consignment;
                 state.user.count_type = res.data.count_type;
                 state.user.count_number = res.data.count_number;
                 state.user.state = res.data.state;
+                state.user.created_at =  res.data.created_at.substr(0, 19);
                 state.user.loaded = true;
             }).catch(err => {
                 clearData();

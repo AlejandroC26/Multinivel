@@ -30,7 +30,6 @@
                                 <th>Nombre</th>
                                 <th>Documento</th>
                                 <th>Estado</th>
-                                <th>Activación</th>
                                 <th>Ingreso</th>
                                 <th>Patrocinador</th>
                                 <th>Acción</th>
@@ -42,10 +41,6 @@
                                 <td>{{user.name}}</td>
                                 <td>{{user.id_card}}</td>
                                 <td>{{user.state}}</td>
-                                <td>
-                                    <span v-if="user.activation_date">{{formatDate(user.activation_date)}}</span>
-                                    <span v-else>N/A</span>
-                                </td>
                                 <td>{{formatDate(user.created_at)}}</td>
                                 <td>
                                     <span v-if="user.sp_user_1_name">{{user.sp_user_1_name}}</span>
