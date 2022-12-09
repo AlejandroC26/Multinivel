@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <select class="form-control" v-model="user.sponsor_user">
                     <option value="" selected disabled v-if="users.length <= 0 && search_code">Usuario no encontrado</option>
-                    <option v-for="user in users" :key="user.id" :value="user.id">{{user.id +' | '+ user.name + ' '}}</option>
+                    <option v-for="user in users" :key="user.id" :value="user.id">{{user.id +' | '+ user.name + ' ' + user.last_name}}</option>
                 </select>
             </div>
         </div>
