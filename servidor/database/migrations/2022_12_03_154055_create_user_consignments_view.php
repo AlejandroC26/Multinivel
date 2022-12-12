@@ -17,7 +17,6 @@ class CreateUserConsignmentsView extends Migration
         return <<<SQL
             CREATE VIEW `user_consignment_view` AS 
                 SELECT u.id, 
-                    u.id_card,
                     u.name,
                     u.last_name,
                     u.state as user_state,

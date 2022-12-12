@@ -10,7 +10,7 @@ export default {
   },
   computed: {
 	  ...mapState(['token']),
-  },
+  }, 
   mounted(){
     const $ = require('jquery')
     window.$ = $;

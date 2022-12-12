@@ -30,7 +30,7 @@ class ConsignmentController extends Controller
 
         $param = 'sp_user_'.($request->devolucion*3);
         $devoluciones = DB::table('list_users_view')
-            ->select('list_users_view.id', 'list_users_view.name','list_users_view.id_card', 'list_users_view.created_at', 
+            ->select('list_users_view.id', 'list_users_view.name', 'list_users_view.created_at', 
             'user_consignment.id as id_image', 'user_consignment.image', 'user_consignment.type', 'user_consignment.state')
             ->leftJoin('user_consignment', 'user_consignment.user_id', '=', 'list_users_view.id')
             ->where($param, '=', $id)
@@ -102,7 +102,7 @@ class ConsignmentController extends Controller
             return response()->json(['message' => 'Este usuario no puede cargar mas archivos de consignación'],400);
         }
 
-        $consignment_file_name = $user->id.'_'.$file_type_name.'_'.$user->id_card.'.jpeg';
+        $consignment_file_name = $user->id.'_'.$file_type_name.'_'.$user->name.'.jpeg';
         $request->file('image')->storeAs('public/user-consignment', $consignment_file_name);
 
         $consignment = UserConsignment::create(array_merge(

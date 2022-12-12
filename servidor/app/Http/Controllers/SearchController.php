@@ -42,9 +42,6 @@ class SearchController extends Controller
             case 'code':
                 $param_search =  'id';
                 break;
-            case 'card':
-                $param_search =  'id_card';
-                break;
             case 'name':
                 $param_search =  'name';
                 break;
@@ -54,7 +51,7 @@ class SearchController extends Controller
                 break;
         }
         
-        $user = User::select('id', 'id_card', 'name','last_name')
+        $user = User::select('id', 'name','last_name')
             ->where($param_search, 'like', $search.'%')
             ->where('state', '!=', 'Finalizado')
             ->take($limit)
@@ -80,9 +77,6 @@ class SearchController extends Controller
             case 'code':
                 $param_search =  'id';
                 break;
-            case 'card':
-                $param_search =  'id_card';
-                break;
             case 'name':
                 $param_search =  'name';
                 break;
@@ -95,7 +89,7 @@ class SearchController extends Controller
                 break;
         }
         
-        $user = ViewSearchUser::select('id', 'name','id_card', 'sp_user_1_name', 'login', 'state', 'created_at')
+        $user = ViewSearchUser::select('id', 'name', 'sp_user_1_name', 'login', 'state', 'created_at')
             ->where($param_search, 'like', $search)
             ->orWhere($param_search, 'like', $search.'%')
             ->take($limit)
@@ -190,9 +184,6 @@ class SearchController extends Controller
             case 'code':
                 $param_search =  'id';
                 break;
-            case 'card':
-                $param_search =  'id_card';
-                break;
             case 'name':
                 $param_search =  'name';
                 break;
@@ -213,7 +204,7 @@ class SearchController extends Controller
                 
                 default:
                     $commissions = DB::table('user_money_view')
-                        ->select('users.id as user_id', 'user_money_view.name as user_name', 'users.id_card', 'current_money as money')
+                        ->select('users.id as user_id', 'user_money_view.name as user_name', 'current_money as money')
                         ->join('users', 'users.id', '=', 'user_money_view.id')
                         ->where('current_money', '>', '1')
                         ->where('users.'.$param_search, 'like', $search.'%')

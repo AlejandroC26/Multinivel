@@ -36,7 +36,6 @@ class UserController extends Controller
             "id" => $user->id,
             "name"=> $user->name,
             "last_name"=> $user->last_name,
-            "id_card"=> $user->id_card,
             "phone"=> $user->phone,
             "city_id"=> $user->city_id,
             'city'=> $user_city[0],
@@ -54,16 +53,14 @@ class UserController extends Controller
     public function list(Request $request)
     {
         $users = User::query()->select([
-            'id', 'name', 'last_name', 
-            'id_card', 'phone', 
+            'id', 'name', 'last_name', 'phone', 
             'login', 'sponsor_user','state', 'created_at'])->get();
         return response()->json(["data" => $users]);
     }
 
     public function listForState(Request $request, $state) {
         $users = User::select([
-            'id', 'name', 'last_name', 
-            'id_card', 'phone', 
+            'id', 'name', 'last_name', 'phone', 
             'phone', 'sponsor_user','state', 'created_at'])
         ->where('state', '=', $state)
         ->get();
@@ -83,7 +80,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'last_name' => 'required|string',
-            'id_card' => 'required|string',
             'phone' => 'required|string',
             'city_id' => 'required|integer',
             'login' => 'required|string|max:100|unique:users',
@@ -99,12 +95,12 @@ class UserController extends Controller
         $sponsor_user = DB::table('users')->find(request(['sponsor_user']));
         
         $find_user = DB::table('users')
-            ->where('id_card', $request->id_card) 
+            ->where('phone', $request->phone) 
             ->where('state', '!=', 'Finalizado')
             ->get();
 
         if(count($find_user) >= 1) 
-            return response()->json(['status'=> 'error', 'message'=> 'Ya hay un usuario registrado con este documento'], 400); 
+            return response()->json(['status'=> 'error', 'message'=> 'Ya hay un usuario registrado con este teléfono'], 400); 
 
         $sponsor_line = DB::table('users')->SELECT(DB::raw('COUNT(*) AS total'))->where('sponsor_user', $request->sponsor_user)->get();
         if($sponsor_line[0]->total >= 2) 
@@ -145,7 +141,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'last_name' => 'required|string',
-            'id_card' => 'required|string',
             'phone' => 'required|string',
             'city_id' => 'required|integer',
             'login' => 'required|string|max:100',
@@ -180,7 +175,6 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->last_name = $request->last_name;
-        $user->id_card = $request->id_card;
         $user->phone = $request->phone;
 
         $user->city_id = $request->city_id;
@@ -269,7 +263,7 @@ class UserController extends Controller
 
     public function reset_password(Request $request, $id){
         $user = User::find($id);
-        $user->password = bcrypt($user->id_card);
+        $user->password = bcrypt($user->phone);
         $user->save();
         return response()->json(['status'=> 'success', 'message'=> 'Password updated successfully'], 201);
     }    

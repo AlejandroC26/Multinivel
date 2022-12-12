@@ -12,7 +12,6 @@ export default {
             id: '',
             name: '',
             last_name: '',
-            id_card: '0',
             primary_phone: '',
             secondary_phone: '',
             whatsapp: '',
@@ -50,7 +49,6 @@ export default {
                 state.user.id = '';
                 state.user.name = '';
                 state.user.last_name = '';
-                state.user.id_card = '';
                 state.user.lines = {};
                 state.user.total_sp = 0,
                 state.user.num_sponsors = 0,
@@ -65,7 +63,6 @@ export default {
                 state.user.id = res.data.id;
                 state.user.name = res.data.name;
                 state.user.last_name = res.data.last_name;
-                state.user.id_card = res.data.id_card;
                 state.user.phone = res.data.phone;
                 state.user.city_id = res.data.city_id;
                 state.user.city_name = res.data.city.city_name;

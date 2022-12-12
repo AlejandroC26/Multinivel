@@ -56,13 +56,9 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
                         <div class="row mt-3 mb-1">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <p>Código</p>
                                 <p type="text" class="form-control" style="cursor: not-allowed">{{user.id}}</p>
-                            </div>
-                            <div class="col-md-9">
-                                <p>Documento</p>
-                                <input type="number" v-model="user.id_card" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-2 mb-1">

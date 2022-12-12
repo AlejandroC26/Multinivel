@@ -37,12 +37,6 @@
                             <hr style="color: var(--color-dark)">
                             <form @submit.prevent="validateRegisterUser(user)">
                                 <div class="row mt-2 mb-1">
-                                    <div class="col-md-12">
-                                        <p>Documento</p>
-                                        <input type="number" class="form-control" v-model="user.id_card">
-                                    </div>
-                                </div>
-                                <div class="row mt-2 mb-1">
                                     <div class="col-md-6">
                                         <p>Nombres</p>
                                         <input type="text" id="name" class="form-control" v-model="user.name">
@@ -145,7 +139,6 @@ export default {
             user : {
                 name: '',
                 last_name: '',
-                id_card: '',
                 primary_phone: '',
                 secondary_phone: '',
                 whatsapp: '',
@@ -183,7 +176,6 @@ export default {
         clearFields(){
             this.user.name = '';
             this.user.last_name = '';
-            this.user.id_card = '';
             this.user.primary_phone = '';
             this.user.secondary_phone = '';
             this.user.whatsapp = '';

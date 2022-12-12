@@ -34,6 +34,10 @@
                     </div>
                     <div class="col-md-5">
                         <a href="/perfil" style="text-decoration: none">
+                            {{formatDate(session_user.created_at)}}<br/>
+                            {{formatDate(sumarDias(session_user.created_at, 11))}}<br/>
+                            {{formatDate(sumarDias(session_user.created_at, 23))}}<br/>
+                            {{formatDate(sumarDias(session_user.created_at, 33))}}
                         <!-- <div 
                             class="dashed-div" 
                             style="--color-dashed: green">
@@ -43,14 +47,14 @@
                             class="dashed-div" 
                             style="--color-dashed: orange"
                             v-if="(
-                                formatDate(sumarDias(session_user.created_at, 12)) === formatDate(new Date()) ||
+                                formatDate(sumarDias(session_user.created_at, 11)) === formatDate(new Date()) ||
                                 formatDate(sumarDias(session_user.created_at, 23)) === formatDate(new Date()) ||
-                                formatDate(sumarDias(session_user.created_at, 34)) === formatDate(new Date())
+                                formatDate(sumarDias(session_user.created_at, 33)) === formatDate(new Date())
                             )">
                             ¡Hoy es día de devoluciones!<br>
-                            <p class="mb-2" v-if="(formatDate(sumarDias(session_user.created_at, 12)) === formatDate(new Date()))" style="font-size: .85rem">Recuerda cargar tu comprobante N° 1</p>
+                            <p class="mb-2" v-if="(formatDate(sumarDias(session_user.created_at, 11)) === formatDate(new Date()))" style="font-size: .85rem">Recuerda cargar tu comprobante N° 1</p>
                             <p class="mb-2" v-if="(formatDate(sumarDias(session_user.created_at, 23)) === formatDate(new Date()))" style="font-size: .85rem">Recuerda cargar tu comprobante N° 2</p>
-                            <p class="mb-2" v-if="(formatDate(sumarDias(session_user.created_at, 34)) === formatDate(new Date()))" style="font-size: .85rem">Recuerda cargar tu comprobante N° 3</p>
+                            <p class="mb-2" v-if="(formatDate(sumarDias(session_user.created_at, 33)) === formatDate(new Date()))" style="font-size: .85rem">Recuerda cargar tu comprobante N° 3</p>
                             <span style="font-size: 1rem;">Paga al usuario: {{session_user.sp_user_name}}</span> <br>
                             <span style="font-size: 1rem">{{session_user.sp_user_count_type}} - {{session_user.sp_user_count_number}}</span> 
                         </div>
@@ -78,7 +82,7 @@
                     <span class="material-icons-sharp">group</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>Usuarios en Red</h3>
+                            <h3>Total de Usuarios</h3>
                             <h1>{{session_lines.total_users}} </h1>
                         </div>
                     </div>
@@ -117,9 +121,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span v-if="(formatDate(sumarDias(session_user.created_at, 12)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 1</span>
+                        <span v-if="(formatDate(sumarDias(session_user.created_at, 11)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 1</span>
                         <span v-if="(formatDate(sumarDias(session_user.created_at, 23)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 2</span>
-                        <span v-if="(formatDate(sumarDias(session_user.created_at, 34)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 3</span>
+                        <span v-if="(formatDate(sumarDias(session_user.created_at, 33)) === formatDate(new Date()))" style="font-size: 1.5rem">Recuerda cargar tu comprobante N° 3</span>
                         <br>
                         <span style="font-size: 1.3rem">Paga al usuario: {{session_user.consign_user_name}}</span> <br>
                         <span style="font-size: 1.3rem">{{session_user.consign_user_count_type}} - {{session_user.consign_user_count_number}}</span> 
@@ -220,9 +224,9 @@ export default {
         this.countPending();
         let session_interval = setInterval(() => {
             if(this.session_user.id) {
-                if(this.formatDate(this.sumarDias(this.session_user.created_at, 12)) === this.formatDate(new Date()) ||
+                if(this.formatDate(this.sumarDias(this.session_user.created_at, 11)) === this.formatDate(new Date()) ||
                 this.formatDate(this.sumarDias(this.session_user.created_at, 23)) === this.formatDate(new Date()) ||
-                this.formatDate(this.sumarDias(this.session_user.created_at, 34)) === this.formatDate(new Date())) {
+                this.formatDate(this.sumarDias(this.session_user.created_at, 33)) === this.formatDate(new Date())) {
                     $('#modal-alerts').modal('show');
                 }
                 return clearInterval(session_interval)

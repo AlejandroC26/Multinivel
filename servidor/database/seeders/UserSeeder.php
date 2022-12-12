@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name'=> 'Admin',
             'last_name' => 'APP',
-            'id_card' => '0',
             'phone' => '0',
             'city_id' => null,
             'login' => 'AdminAPP',
@@ -31,7 +30,6 @@ class UserSeeder extends Seeder
         $user2 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Uno',
-            'id_card' => '123',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario1',
@@ -46,7 +44,6 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Dos',
-            'id_card' => '234',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario2',
@@ -61,7 +58,6 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Tres',
-            'id_card' => '345',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario3',
@@ -76,7 +72,6 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Cuatro',
-            'id_card' => '345',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario4',
@@ -91,7 +86,6 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Cinco',
-            'id_card' => '345',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario5',
@@ -106,7 +100,6 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'name'=> 'Usuario',
             'last_name' => 'Seis',
-            'id_card' => '345',
             'phone' => '313',
             'city_id' => 1,
             'login' => 'usuario6',

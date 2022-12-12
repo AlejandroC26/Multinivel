@@ -16,7 +16,7 @@ class CreateSearchUserView extends Migration
     {
         return <<<SQL
             CREATE VIEW `search_user_view` AS 
-                select  u.id, CONCAT(u.name, ' ', u.last_name) as 'name', u.id_card, u.phone, u.state,
+                select  u.id, CONCAT(u.name, ' ', u.last_name) as 'name', u.phone, u.state,
                     sp_user.id as sp_user_1, CONCAT(sp_user.name, ' ', sp_user.last_name) as sp_user_1_name,
                     u.city_id, c.name as city_name, c.department, c.country_code, cou.name as country_name,
                     u.login, u.created_at 

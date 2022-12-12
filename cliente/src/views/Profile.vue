@@ -30,12 +30,6 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
-                        <div class="row mt-3 mb-1">
-                            <div class="col-md-12">
-                                <p>Documento</p>
-                                <p type="text" class="form-control" style="cursor: not-allowed">{{session_user.id_card}}</p>
-                            </div>
-                        </div>
                         <div class="row mt-2 mb-1">
                             <div class="col-md-6">
                                 <p>Nombres</p>
@@ -245,7 +239,6 @@ export default {
                 id: '',
                 name: '',
                 last_name: '',
-                id_card: '0',
                 phone: '',
                 city_id: '',
                 city_name: '',
@@ -436,7 +429,6 @@ export default {
                 this.user.id = this.session_user.id;
                 this.user.name = this.session_user.name;
                 this.user.last_name = this.session_user.last_name;
-                this.user.id_card = this.session_user.id_card;
                 this.user.phone = this.session_user.phone;
                 this.user.city_id = this.session_user.city_id;
                 this.user.department = this.session_user.city.department;
